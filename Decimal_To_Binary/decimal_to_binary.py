@@ -1,8 +1,7 @@
 def decimal_to_binary(x):
-    result = x
     if x >= 2:
-        result = str(decimal_to_binary(x // 2)) + str(x % 2)
-    return result
+        x = str(decimal_to_binary(x // 2)) + str(x % 2)
+    return x
 
 
 for i in range(64):
