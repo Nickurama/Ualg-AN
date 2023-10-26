@@ -1,5 +1,6 @@
 import bisector
 import newton
+import secant
 import math_input
 from sympy import *
 
@@ -12,7 +13,7 @@ while exit == false:
         precision = math_input.math_input.get_precision()  # 0 < x <= 100
         expression = math_input.math_input.get_expression(
             precision
-        )  # pi / E / x^n / n*n / n+n / n-n / n/n / log(x,base)
+        )  # pi / E / x^n / n*n / n+n / n-n / n/n / log(x,base) / sqrt(x)
         range0 = math_input.math_input.get_range0(precision)
         range1 = math_input.math_input.get_range1(
             range0, precision
@@ -42,6 +43,15 @@ while exit == false:
             print(f"result: {round(result_newton, precision)}")  # rounded to precision
         except:
             print("Newton's method failed.")
+        try:
+            print(">-- root (Secant) --<")
+            result_newton = secant.secant.calc_root_nonrecursive(
+                expression, range0, range1, error_margin, max_iterations
+            )
+            print(f"result: {round(result_newton, precision)}")  # rounded to precision
+        except Exception as e:
+            print(str(e))
+            print("Secant's method failed.")
     except KeyboardInterrupt:
         exit = true
     except Exception as e:
