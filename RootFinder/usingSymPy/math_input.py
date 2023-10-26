@@ -5,7 +5,10 @@ class math_input:
     def get_precision():
         this_input = input("precision: ")
         try:
-            this_input = N(this_input)
+            try:
+                this_input = N(this_input)
+            except:
+                raise Exception("Error: precision must be an integer.")
             if (ask(Q.integer(this_input))):
                 raise Exception("Error: precision must be an integer.")
             if (this_input < 0 or this_input > 100):
