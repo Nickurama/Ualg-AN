@@ -47,7 +47,7 @@ class math_input:
         try:
             if not ask(Q.real(this_input)):
                 raise Exception("Error: Invalid range.")
-            elif range0 >= this_input:
+            elif range0 > this_input:
                 raise Exception(
                     "Error: final range should be greater than initial range."
                 )
