@@ -32,22 +32,6 @@ class math_input:
         except Exception as e:
             raise e
 
-    # @staticmethod
-    # def get_num_equations(num_variables):
-    #     this_input = input("number of equations: ")
-    #     try:
-    #         try:
-    #             this_input = int(this_input)
-    #         except:
-    #             raise Exception("Error: number of equations must be an integer.")
-    #         if this_input <= 0:
-    #             raise Exception("Error: number of equations should be a number greater than zero.")
-    #         if this_input < num_variables:
-    #             raise Exception("Error: number of equations should be equal or greater than the number of variables")
-    #         return this_input
-    #     except Exception as e:
-    #         raise e
-    
     @staticmethod
     def get_row(num_variables, row_num, precision):
         row = []
