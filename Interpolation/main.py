@@ -32,21 +32,39 @@ while exit == false:
         x_values = math_input.math_input.get_values(num_nodes, precision, "x")
         y_values = math_input.math_input.get_values(num_nodes, precision, "y")
         print_values(x_values, y_values)
-        error_margin = math_input.math_input.get_error_margin(precision)
+        neville_success = false
+        newton_success = false
+        exit_x_input = false
+        result_neville = 0
+        result_newton = 0
         try:
             print(">-- interpolation (Neville) --<")
-            result_neville = neville.neville.solve(x_values, y_values, error_margin)
+            result_neville = neville.neville.solve(x_values, y_values)
             pprint(simplify(result_neville), use_unicode=False)
         except Exception as e:
             print("Neville's method failed.")
             print(str(e))
         try:
             print(">-- interpolation (Newton) --<")
-            result_newton = newton.newton.solve(x_values, y_values, error_margin)
+            result_newton = newton.newton.solve(x_values, y_values)
             pprint(simplify(result_newton), use_unicode=False)
         except Exception as e:
             print("Newton's method failed.")
             print(str(e))
+
+        print("Starting iterative cycle of computing f(x) using the above interpolations. (Ctrl+C to stop)")
+        if neville_success or newton_success:
+            while exit_x_input == false:
+                try:
+                    x = math_input.math_input.get_x_value()
+                    print("Using Newton's...")
+                    print("f(x) = " + result_newton.subs(Symbol("x"), x))
+                    print("Using Neville's...")
+                    print("f(x) = " + result_neville.subs(Symbol("x"), x))
+                except KeyboardInterrupt:
+                    exit_x_input = true
+        else:
+            print("both methods failed! repeating...")
     except KeyboardInterrupt:
         exit = true
     except Exception as e:

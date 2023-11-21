@@ -2,7 +2,7 @@ from sympy import *
 
 class newton:
     @staticmethod
-    def solve(x_values, y_values, error_margin):
+    def solve(x_values, y_values):
         n = len(x_values)
         Q = [[0 for i in range(n)] for j in range(n)]
 
