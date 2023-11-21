@@ -32,9 +32,9 @@ while exit == false:
         x_values = math_input.math_input.get_values(num_nodes, precision, "x")
         y_values = math_input.math_input.get_values(num_nodes, precision, "y")
         print_values(x_values, y_values)
-        neville_success = false
-        newton_success = false
-        exit_x_input = false
+        neville_success = False
+        newton_success = False
+        exit_x_input = False
         result_neville = 0
         result_newton = 0
         error_neville = -1
@@ -44,7 +44,7 @@ while exit == false:
             result = neville.neville.solve(x_values, y_values)
             result_neville = result[0]
             error_neville = result[1]
-            neville_success = true;
+            neville_success = True
             pprint(simplify(result_neville), use_unicode=False)
         except Exception as e:
             print("Neville's method failed.")
@@ -52,7 +52,7 @@ while exit == false:
         try:
             print(">-- interpolation (Newton) --<")
             result_newton = newton.newton.solve(x_values, y_values)
-            newton_success = true;
+            newton_success = True
             pprint(simplify(result_newton), use_unicode=False)
         except Exception as e:
             print("Newton's method failed.")
@@ -63,7 +63,6 @@ while exit == false:
             while exit_x_input == false:
                 try:
                     x = math_input.math_input.get_x_value(precision)
-                    print(x)
                     print("Using Newton's...")
                     print("f(x) = ", end="")
                     pprint(result_newton.subs(Symbol("x"), x))
