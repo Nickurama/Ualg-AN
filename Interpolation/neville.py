@@ -13,7 +13,10 @@ class neville:
             else:
                 for row in range(n - column):
                     neville.Q_calc(Q, x_values, symbols('x'), column + row, column)
-        return Q[n - 1][n - 1]
+        error = -1
+        if n > 2:
+            error = simplify(abs(Q[n-1][n-1] - Q[n-2][n-2]))
+        return [Q[n - 1][n - 1], error]
     
     @staticmethod
     def Q_calc(Q, x_values, value, row, column):

@@ -37,9 +37,14 @@ while exit == false:
         exit_x_input = false
         result_neville = 0
         result_newton = 0
+        error_neville = -1
+        error_newton = -1
         try:
             print(">-- interpolation (Neville) --<")
-            result_neville = neville.neville.solve(x_values, y_values)
+            result = neville.neville.solve(x_values, y_values)
+            result_neville = result[0]
+            error_neville = result[1]
+            neville_success = true;
             pprint(simplify(result_neville), use_unicode=False)
         except Exception as e:
             print("Neville's method failed.")
@@ -47,6 +52,7 @@ while exit == false:
         try:
             print(">-- interpolation (Newton) --<")
             result_newton = newton.newton.solve(x_values, y_values)
+            newton_success = true;
             pprint(simplify(result_newton), use_unicode=False)
         except Exception as e:
             print("Newton's method failed.")
@@ -56,11 +62,21 @@ while exit == false:
         if neville_success or newton_success:
             while exit_x_input == false:
                 try:
-                    x = math_input.math_input.get_x_value()
+                    x = math_input.math_input.get_x_value(precision)
+                    print(x)
                     print("Using Newton's...")
-                    print("f(x) = " + result_newton.subs(Symbol("x"), x))
+                    print("f(x) = ", end="")
+                    pprint(result_newton.subs(Symbol("x"), x))
                     print("Using Neville's...")
-                    print("f(x) = " + result_neville.subs(Symbol("x"), x))
+                    print("f(x) = ", end="")
+                    pprint(result_neville.subs(Symbol("x"), x))
+                    if error_neville < 0:
+                        print("error could not be calculated: must give over two values for an error estimate.")
+                    elif x in x_values:
+                        print("error = ±0")
+                    else:
+                        print("error = ±", end="")
+                        pprint(error_neville.subs(Symbol("x"), x))
                 except KeyboardInterrupt:
                     exit_x_input = true
         else:

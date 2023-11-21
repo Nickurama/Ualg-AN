@@ -51,17 +51,11 @@ class math_input:
         
     @staticmethod
     def get_x_value(precision):
-        values = [];
         this_input = input(f"x=")
         try:
-            tokens = this_input.split(" ")
-            if len(tokens) != num_nodes:
-                raise Exception(f"Error: expected {num_nodes} variables but got {len(tokens)}.")
-            for token in tokens:
-                value = N(token, precision)
-                if not ask(Q.real(value)):
-                    raise Exception(f"Error: Invalid node '{token}'.")
-                values.append(value)
-            return values
+            value = N(this_input, precision)
+            if not ask(Q.real(value)):
+                raise Exception(f"Error: Invalid x value '{value}'.")
+            return value
         except Exception as e:
             raise e
