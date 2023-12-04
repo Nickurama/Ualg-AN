@@ -13,16 +13,20 @@ while exit == false:
         range0 = math_input.math_input.get_range0(precision)
         range1 = math_input.math_input.get_range1(range0, precision)
         try:
-            print(">-- Integration (Newton-Cotes Closed) --<")
+            print(">-- Integration (Newton-Cotes Closed: n=4) --<")
             result = nc_closed.nc_closed.solve(expression, range0, range1)
-            pprint(simplify(result), use_unicode=False)
+            error = nc_closed.nc_closed.calc_error(expression, range0, range1)
+            print(f"result: {round(result, precision)}")
+            print(f"error: ±{round(error, precision)}")
         except Exception as e:
             print("Newton-Cotes Closed method failed.")
             print(str(e))
         try:
-            print(">-- Integration (Newton-Cotes Open) --<")
+            print(">-- Integration (Newton-Cotes Open: n=4) --<")
             result = nc_open.nc_open.solve(expression, range0, range1)
-            pprint(simplify(result), use_unicode=False)
+            error = nc_open.nc_open.calc_error(expression, range0, range1)
+            print(f"result: {round(result, precision)}")
+            print(f"error: ±{round(error, precision)}")
         except Exception as e:
             print("Newton-Cotes Open method failed.")
             print(str(e))
