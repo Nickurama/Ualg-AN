@@ -22,7 +22,7 @@ while exit == false:
             print("Newton-Cotes Closed method failed.")
             print(str(e))
         try:
-            print(">-- Integration (Newton-Cotes Open: n=4) --<")
+            print(">-- Integration (Newton-Cotes Open: n=3) --<")
             result = nc_open.nc_open.solve(expression, range0, range1)
             error = nc_open.nc_open.calc_error(expression, range0, range1)
             print(f"result: {round(result, precision)}")
